@@ -17,4 +17,31 @@ export const t = {
     },
     submit: "ورود",
   },
+  dashboard: {
+    title: "داشبورد",
+    logout: "خروج",
+  },
+  reservation: {
+    title: "رزرو ها",
+    addReservation: "افزودن رزرو",
+    status: {
+      all: "همه",
+      pending: "در انتظار",
+      confirmed: "تایید شده",
+      cancelled: "لغو شده",
+      na: "نامشخص",
+    },
+    filters: {
+      customerPlaceholder: "جستجو بر اساس نام مشتری",
+      phonePlaceholder: "جستجو بر اساس شماره تماس",
+      statusPlaceholder: "جستجو بر اساس وضعیت",
+    },
+    table: {
+      customer: "نام مشتری",
+      phone: "شماره تماس",
+      type: "نوع خدمت",
+      status: "وضعیت",
+      date: "تاریخ",
+    },
+  },
 };
