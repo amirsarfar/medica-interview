@@ -1,15 +1,20 @@
-export const messages = {
+export const t = {
   login: {
-    username: {
-      label: "Username",
-      placeholder: "Enter your username",
-      required: "Username is required",
+    form: {
+      title: "ورود",
+      description: "لطفاً اطلاعات خود را وارد کنید.",
+    },
+    email: {
+      label: "ایمیل",
+      placeholder: "لطفاً ایمیل خود را وارد کنید",
+      required: "ایمیل الزامی است",
+      invalid: "ایمیل وارد شده معتبر نیست",
     },
     password: {
-      label: "Password",
-      placeholder: "Enter your password",
-      required: "Password is required",
+      label: "رمز عبور",
+      placeholder: "لطفاً رمز عبور خود را وارد کنید",
+      required: "رمز عبور الزامی است",
     },
-    submit: "Login",
+    submit: "ورود",
   },
 };
