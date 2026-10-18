@@ -18,7 +18,7 @@ export const t = {
     submit: "ورود",
   },
   dashboard: {
-    title: "داشبورد",
+    title: "سامانه رزرو خدمات",
     logout: "خروج",
   },
   reservation: {
