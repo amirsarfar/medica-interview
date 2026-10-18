@@ -13,7 +13,6 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from "@/components/ui/select";
 import {
   Table,
@@ -26,17 +25,7 @@ import {
 import { t } from "@/lib/translations";
 import { XIcon } from "lucide-react";
 import { useState } from "react";
-
-type Status = "pending" | "confirmed" | "cancelled";
-
-type Reservation = {
-  id: string;
-  customer: string;
-  phone: string;
-  type: string;
-  date: string;
-  status: Status;
-};
+import { ReservationDetail } from "./detail";
 
 const reservations: Reservation[] = [
   {
@@ -84,6 +73,7 @@ export function Reservations() {
   const [customer, setCustomer] = useState("");
   const [phone, setPhone] = useState("");
   const [status, setStatus] = useState<Status | "all">("all");
+  const [reservationDetail, setReservationDetail] = useState<Reservation>();
 
   const filteredReservations = reservations.filter(
     (reservation) =>
@@ -100,6 +90,12 @@ export function Reservations() {
 
   return (
     <div className="flex flex-col h-full grow p-4 gap-8">
+      <ReservationDetail
+        reservation={reservationDetail}
+        isOpen={!!reservationDetail}
+        onClose={() => setReservationDetail(undefined)}
+      />
+
       <div className="flex items-center justify-between p-4">
         <div>
           <h1 className="text-2xl font-bold">{t.reservation.title}</h1>
@@ -220,7 +216,10 @@ export function Reservations() {
           </TableHeader>
           <TableBody>
             {filteredReservations.map((reservation) => (
-              <TableRow key={reservation.id}>
+              <TableRow
+                key={reservation.id}
+                onDoubleClick={() => setReservationDetail(reservation)}
+              >
                 <TableCell>{reservation.customer}</TableCell>
                 <TableCell>{reservation.phone}</TableCell>
                 <TableCell>{reservation.type}</TableCell>
