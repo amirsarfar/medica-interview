@@ -7,7 +7,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   reservationSchema,
@@ -15,7 +14,6 @@ import {
 } from "@/lib/validations/reservation";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import {
   Field,
   FieldError,
@@ -25,8 +23,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { t } from "@/lib/translations";
 import { useReservationsStore } from "@/stores/providers/reservations-provider";
-import { DatePicker } from "@/components/ui/date-picker";
 import { DateTimePicker } from "@/components/ui/datetime-picker";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+} from "@/components/ui/select";
+import { getStatusLabel } from "@/lib/utils";
 
 export function ReservationDetail({
   reservation,
@@ -47,7 +51,6 @@ export function ReservationDetail({
 
   const createReservation = useReservationsStore((state) => state.create);
   const updateReservation = useReservationsStore((state) => state.update);
-  const deleteReservation = useReservationsStore((state) => state.delete);
 
   const form = useForm<ReservationValues>({
     resolver: zodResolver(reservationSchema),
@@ -85,19 +88,19 @@ export function ReservationDetail({
           </DialogDescription>
         </DialogHeader>
 
-        <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
+        <form id="form-reservation" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
             <Controller
               name="customer"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-title">
+                  <FieldLabel htmlFor="form-customer">
                     {t.reservation.form.customer.label}
                   </FieldLabel>
                   <Input
                     {...field}
-                    id="form-rhf-demo-title"
+                    id="form-customer"
                     aria-invalid={fieldState.invalid}
                     placeholder={t.reservation.form.customer.placeholder}
                     autoComplete="off"
@@ -113,12 +116,12 @@ export function ReservationDetail({
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-description">
+                  <FieldLabel htmlFor="form-phone">
                     {t.reservation.form.phone.label}
                   </FieldLabel>
                   <Input
                     {...field}
-                    id="form-rhf-demo-description"
+                    id="form-phone"
                     aria-invalid={fieldState.invalid}
                     placeholder={t.reservation.form.phone.placeholder}
                     autoComplete="off"
@@ -134,12 +137,12 @@ export function ReservationDetail({
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-description">
+                  <FieldLabel htmlFor="form-type">
                     {t.reservation.form.type.label}
                   </FieldLabel>
                   <Input
                     {...field}
-                    id="form-rhf-demo-description"
+                    id="form-type"
                     aria-invalid={fieldState.invalid}
                     placeholder={t.reservation.form.type.placeholder}
                     autoComplete="off"
@@ -150,12 +153,13 @@ export function ReservationDetail({
                 </Field>
               )}
             />
+
             <Controller
               name="date"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-description">
+                  <FieldLabel htmlFor="form-date">
                     {t.reservation.form.date.label}
                   </FieldLabel>
                   <DateTimePicker
@@ -174,20 +178,33 @@ export function ReservationDetail({
                 </Field>
               )}
             />
+
             <Controller
               name="status"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-description">
+                  <FieldLabel htmlFor="form-status">
                     {t.reservation.form.status.label}
                   </FieldLabel>
-                  <Input
-                    {...field}
-                    id="form-rhf-demo-description"
-                    aria-invalid={fieldState.invalid}
-                    autoComplete="off"
-                  />
+                  <Select
+                    id="form-status"
+                    value={field.value}
+                    onValueChange={field.onChange}
+                  >
+                    <SelectTrigger>{getStatusLabel(field.value)}</SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="pending">
+                        {getStatusLabel("pending")}
+                      </SelectItem>
+                      <SelectItem value="confirmed">
+                        {getStatusLabel("confirmed")}
+                      </SelectItem>
+                      <SelectItem value="cancelled">
+                        {getStatusLabel("cancelled")}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
@@ -197,8 +214,12 @@ export function ReservationDetail({
           </FieldGroup>
 
           <DialogFooter>
-            <DialogClose render={<Button variant="outline">Cancel</Button>} />
-            <Button type="submit">Save changes</Button>
+            <DialogClose
+              render={
+                <Button variant="outline">{t.reservation.form.cancel}</Button>
+              }
+            />
+            <Button type="submit">{t.reservation.form.submit}</Button>
           </DialogFooter>
         </form>
       </DialogContent>

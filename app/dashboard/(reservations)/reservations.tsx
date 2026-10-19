@@ -27,21 +27,7 @@ import { XIcon } from "lucide-react";
 import { useState } from "react";
 import { ReservationDetail } from "./detail";
 import { useReservationsStore } from "@/stores/providers/reservations-provider";
-
-const getStatusLabel = (status: Status | "all") => {
-  switch (status) {
-    case "pending":
-      return t.reservation.status.pending;
-    case "confirmed":
-      return t.reservation.status.confirmed;
-    case "cancelled":
-      return t.reservation.status.cancelled;
-    case "all":
-      return t.reservation.status.all;
-    default:
-      return t.reservation.status.na;
-  }
-};
+import { getStatusLabel } from "@/lib/utils";
 
 export function Reservations() {
   const [customer, setCustomer] = useState("");
@@ -179,15 +165,13 @@ export function Reservations() {
               : getStatusLabel(status)}
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">{t.reservation.status.all}</SelectItem>
-            <SelectItem value="pending">
-              {t.reservation.status.pending}
-            </SelectItem>
+            <SelectItem value="all">{getStatusLabel("all")}</SelectItem>
+            <SelectItem value="pending">{getStatusLabel("pending")}</SelectItem>
             <SelectItem value="confirmed">
-              {t.reservation.status.confirmed}
+              {getStatusLabel("confirmed")}
             </SelectItem>
             <SelectItem value="cancelled">
-              {t.reservation.status.cancelled}
+              {getStatusLabel("cancelled")}
             </SelectItem>
           </SelectContent>
         </Select>
