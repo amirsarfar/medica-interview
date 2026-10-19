@@ -7,7 +7,7 @@ import {
   type DayButton,
   type Locale,
 } from "@daypicker/react";
-import { DayPicker } from "@daypicker/persian";
+import { DayPicker, faIRJalali } from "@daypicker/persian";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   ChevronLeftIcon,
@@ -21,7 +21,7 @@ function Calendar({
   showOutsideDays = true,
   captionLayout = "label",
   buttonVariant = "ghost",
-  locale,
+  locale = faIRJalali,
   formatters,
   components,
   ...props
