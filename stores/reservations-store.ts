@@ -18,7 +18,7 @@ export const defaultInitState: ReservationsState = {
       customer: "علی رضایی",
       phone: "09123456789",
       type: "خدمت ۱",
-      date: "2024-06-01",
+      date: "2027-06-01T16:14:05.428Z",
       status: "confirmed",
     },
     {
@@ -26,7 +26,7 @@ export const defaultInitState: ReservationsState = {
       customer: "فاطمه محمدی",
       phone: "09123456788",
       type: "خدمت ۲",
-      date: "2024-06-02",
+      date: "2027-06-02T16:14:05.428Z",
       status: "pending",
     },
     {
@@ -34,7 +34,7 @@ export const defaultInitState: ReservationsState = {
       customer: "محمدرضا علیزاده",
       phone: "09123456787",
       type: "خدمت ۳",
-      date: "2024-06-03",
+      date: "2027-06-03T16:14:05.428Z",
       status: "cancelled",
     },
   ],

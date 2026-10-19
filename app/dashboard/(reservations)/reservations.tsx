@@ -28,6 +28,7 @@ import { useState } from "react";
 import { ReservationDetail } from "./detail";
 import { useReservationsStore } from "@/stores/providers/reservations-provider";
 import { getStatusLabel } from "@/lib/utils";
+import { format } from "date-fns-jalali";
 
 export function Reservations() {
   const [customer, setCustomer] = useState("");
@@ -197,7 +198,9 @@ export function Reservations() {
                 <TableCell>{reservation.customer}</TableCell>
                 <TableCell>{reservation.phone}</TableCell>
                 <TableCell>{reservation.type}</TableCell>
-                <TableCell>{reservation.date}</TableCell>
+                <TableCell>
+                  {format(new Date(reservation.date), "PPP HH:mm")}
+                </TableCell>
                 <TableCell>{getStatusLabel(reservation.status)}</TableCell>
               </TableRow>
             ))}
