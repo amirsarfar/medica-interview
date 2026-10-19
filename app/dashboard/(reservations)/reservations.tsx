@@ -26,33 +26,7 @@ import { t } from "@/lib/translations";
 import { XIcon } from "lucide-react";
 import { useState } from "react";
 import { ReservationDetail } from "./detail";
-
-const reservations: Reservation[] = [
-  {
-    id: "1",
-    customer: "علی رضایی",
-    phone: "09123456789",
-    type: "خدمت ۱",
-    date: "2024-06-01",
-    status: "confirmed",
-  },
-  {
-    id: "2",
-    customer: "فاطمه محمدی",
-    phone: "09123456788",
-    type: "خدمت ۲",
-    date: "2024-06-02",
-    status: "pending",
-  },
-  {
-    id: "3",
-    customer: "محمدرضا علیزاده",
-    phone: "09123456787",
-    type: "خدمت ۳",
-    date: "2024-06-03",
-    status: "cancelled",
-  },
-];
+import { useReservationsStore } from "@/stores/providers/reservations-provider";
 
 const getStatusLabel = (status: Status | "all") => {
   switch (status) {
@@ -75,6 +49,8 @@ export function Reservations() {
   const [status, setStatus] = useState<Status | "all">("all");
   const [reservationDetail, setReservationDetail] = useState<Reservation>();
 
+  const reservations = useReservationsStore((state) => state.reservations);
+
   const filteredReservations = reservations.filter(
     (reservation) =>
       reservation.customer.includes(customer) &&
@@ -90,17 +66,31 @@ export function Reservations() {
 
   return (
     <div className="flex flex-col h-full grow p-4 gap-8">
-      <ReservationDetail
-        reservation={reservationDetail}
-        isOpen={!!reservationDetail}
-        onClose={() => setReservationDetail(undefined)}
-      />
+      {!!reservationDetail && (
+        <ReservationDetail
+          reservation={reservationDetail}
+          onClose={() => setReservationDetail(undefined)}
+        />
+      )}
 
       <div className="flex items-center justify-between p-4">
         <div>
           <h1 className="text-2xl font-bold">{t.reservation.title}</h1>
         </div>
-        <Button>{t.reservation.addReservation}</Button>
+        <Button
+          onClick={() =>
+            setReservationDetail({
+              id: "new",
+              customer: "",
+              phone: "",
+              type: "",
+              date: new Date().toISOString(),
+              status: "pending",
+            })
+          }
+        >
+          {t.reservation.addReservation}
+        </Button>
       </div>
 
       <div className="flex gap-4">

@@ -1,5 +1,10 @@
+import { ReservationsStoreProvider } from "@/stores/providers/reservations-provider";
 import { Reservations } from "./reservations";
 
 export default function ReservationsPage() {
-  return <Reservations />;
+  return (
+    <ReservationsStoreProvider>
+      <Reservations />
+    </ReservationsStoreProvider>
+  );
 }
