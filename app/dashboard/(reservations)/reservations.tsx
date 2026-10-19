@@ -80,18 +80,15 @@ export function Reservations() {
         </Button>
       </div>
 
-      <div className="flex gap-4">
-        <Card
-          className="w-1/4 cursor-pointer"
-          onClick={() => setStatusByCard("all")}
-        >
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <Card className="cursor-pointer" onClick={() => setStatusByCard("all")}>
           <CardHeader>
             <CardTitle>{t.reservation.status.all}</CardTitle>
             <CardAction>{reservations.length}</CardAction>
           </CardHeader>
         </Card>
         <Card
-          className="w-1/4 bg-amber-100 cursor-pointer"
+          className="bg-amber-100 cursor-pointer"
           onClick={() => setStatusByCard("pending")}
         >
           <CardHeader>
@@ -102,7 +99,7 @@ export function Reservations() {
           </CardHeader>
         </Card>
         <Card
-          className="w-1/4 bg-green-100 cursor-pointer"
+          className="bg-green-100 cursor-pointer"
           onClick={() => setStatusByCard("confirmed")}
         >
           <CardHeader>
@@ -113,7 +110,7 @@ export function Reservations() {
           </CardHeader>
         </Card>
         <Card
-          className="w-1/4 bg-red-100 cursor-pointer"
+          className="bg-red-100 cursor-pointer"
           onClick={() => setStatusByCard("cancelled")}
         >
           <CardHeader>
@@ -125,8 +122,8 @@ export function Reservations() {
         </Card>
       </div>
 
-      <div className="flex gap-4">
-        <InputGroup className="flex-1">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <InputGroup>
           <InputGroupInput
             placeholder={t.reservation.filters.customerPlaceholder}
             value={customer}
@@ -141,7 +138,7 @@ export function Reservations() {
           </InputGroupAddon>
         </InputGroup>
 
-        <InputGroup className="flex-1">
+        <InputGroup>
           <InputGroupInput
             placeholder={t.reservation.filters.phonePlaceholder}
             value={phone}
@@ -160,7 +157,7 @@ export function Reservations() {
           value={status}
           onValueChange={(value) => setStatus(value as Status | "all")}
         >
-          <SelectTrigger className="flex-1">
+          <SelectTrigger className="w-full">
             {status === "all"
               ? t.reservation.filters.statusPlaceholder
               : getStatusLabel(status)}
@@ -193,7 +190,7 @@ export function Reservations() {
             {filteredReservations.map((reservation) => (
               <TableRow
                 key={reservation.id}
-                onDoubleClick={() => setReservationDetail(reservation)}
+                onClick={() => setReservationDetail(reservation)}
               >
                 <TableCell>{reservation.customer}</TableCell>
                 <TableCell>{reservation.phone}</TableCell>
