@@ -42,6 +42,7 @@ export const t = {
       type: "نوع خدمت",
       status: "وضعیت",
       date: "تاریخ",
+      empty: "هیچ رزروی یافت نشد",
     },
     form: {
       title: "فرم رزرو",

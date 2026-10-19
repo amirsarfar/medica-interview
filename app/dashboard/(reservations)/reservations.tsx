@@ -204,6 +204,13 @@ export function Reservations() {
                 <TableCell>{getStatusLabel(reservation.status)}</TableCell>
               </TableRow>
             ))}
+            {filteredReservations.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={5} className="text-center">
+                  {t.reservation.table.empty}
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </div>
