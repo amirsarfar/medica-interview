@@ -3,6 +3,7 @@ import { Vazirmatn } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toast";
+import { Suspense } from "react";
 
 const vazirmatn = Vazirmatn({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -19,7 +20,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={cn("h-full", "antialiased", vazirmatn.variable, "font-sans")}
     >
       <body className="min-h-dvh flex flex-col">
-        {children}
+        <Suspense fallback={"Loading..."}>{children}</Suspense>
         <Toaster />
       </body>
     </html>

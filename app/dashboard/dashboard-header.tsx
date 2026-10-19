@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { setLoginStatus } from "@/lib/simple-auth";
 import { t } from "@/lib/translations";
 import { redirect } from "next/navigation";
 
@@ -13,6 +14,7 @@ export function DashboardHeader() {
       <Button
         variant="destructive"
         onClick={() => {
+          setLoginStatus(false);
           redirect("/");
         }}
       >

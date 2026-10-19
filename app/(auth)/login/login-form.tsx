@@ -30,6 +30,7 @@ import { t } from "@/lib/translations";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 import { redirect } from "next/navigation";
+import { setLoginStatus } from "@/lib/simple-auth";
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -44,6 +45,7 @@ export function LoginForm() {
 
   function onSubmit(data: LoginValues) {
     if (data.email === "admin@example.com" && data.password === "password") {
+      setLoginStatus(true);
       redirect("/dashboard");
     } else {
       toast.add({
