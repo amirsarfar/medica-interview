@@ -43,5 +43,33 @@ export const t = {
       status: "وضعیت",
       date: "تاریخ",
     },
+    form: {
+      title: "فرم رزرو",
+      description: "لطفاً اطلاعات رزرو خود را وارد کنید.",
+      submit: "ثبت رزرو",
+      customer: {
+        label: "نام مشتری",
+        placeholder: "لطفاً نام مشتری را وارد کنید",
+        required: "نام مشتری الزامی است",
+      },
+      phone: {
+        label: "شماره تماس",
+        placeholder: "لطفاً شماره تماس را وارد کنید",
+        required: "شماره تماس الزامی است",
+      },
+      type: {
+        label: "نوع خدمت",
+        placeholder: "لطفاً نوع خدمت را وارد کنید",
+        required: "نوع خدمت الزامی است",
+      },
+      date: {
+        label: "تاریخ",
+        placeholder: "لطفاً تاریخ را وارد کنید",
+        required: "تاریخ الزامی است",
+      },
+      status: {
+        label: "وضعیت",
+      },
+    },
   },
 };
